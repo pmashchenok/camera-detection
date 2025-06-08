@@ -18,7 +18,7 @@ def draw_bbox(frame, boxes, confs):
 
 
 if __name__ == '__main__':
-    user_input = input("Показывать видео во время обработки? (y/n): ").strip().lower()
+    user_input = input("Показывать обработанное видео? (y/n): ").strip().lower()
     show_video = user_input in ['да', 'yes', 'y', 'true', '1']
     model = YOLO('yolov8n.pt')
     input_video_path = 'crowd.mp4'
