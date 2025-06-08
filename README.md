@@ -14,7 +14,7 @@ git clone https://github.com/pmashchenok/camera-detection.git
 pip install -r requirements.txt
 ```
 
-### Запуск программы.
+### Запуск программы
 ```bash
 python main.py
 ```
