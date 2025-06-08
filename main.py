@@ -5,20 +5,19 @@ import numpy as np
 
 def draw_bbox(frame, boxes, confs):
     """
-    Отрисовка объектов класса person с ID и confidence
+    Отрисовка объектов класса person и confidence
     """
     for i, (box, conf) in enumerate(zip(boxes, confs), start=1):
         x1, y1, x2, y2 = box
-        color = (255, 0, 0)
-        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
-        label = f"ID:{i} {conf:.2f}"
-        cv2.putText(frame, label, (x1, y1 - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+        bbox_color = (255, 0, 0)
+        text_color = (0, 0, 255)
+        cv2.rectangle(frame, (x1, y1), (x2, y2), bbox_color, 2)
+        label = f"Person {i}. Conf: {conf:.2f}"
+        cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, text_color, 2)
     return frame
 
 
 if __name__ == '__main__':
-
     user_input = input("Показывать видео во время обработки? (y/n): ").strip().lower()
     show_video = user_input in ['да', 'yes', 'y', 'true', '1']
     model = YOLO('yolov8n.pt')
@@ -41,7 +40,7 @@ if __name__ == '__main__':
         boxes = results.boxes.xyxy.cpu().numpy().astype(np.int32)
         confs = results.boxes.conf.cpu().numpy()
 
-        indices = np.where(confs > 0.2)[0]
+        indices = np.where(confs > 0.25)[0]
         filtered_boxes = boxes[indices]
         filtered_confs = confs[indices]
 
