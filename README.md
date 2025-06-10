@@ -10,10 +10,18 @@ git clone https://github.com/pmashchenok/camera-detection.git
 ```
 
 ### Установка зависимостей
+Windows
 ```bash
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
-
+Linux / macOS
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 ### Запуск программы
 ```bash
 python main.py
